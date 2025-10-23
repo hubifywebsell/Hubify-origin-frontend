@@ -35,7 +35,7 @@ export function ProductPage(){
                 <div className="w-full h-full flex flex-row flex-wrap justify-center bg-white">
                     {
                         products.map((item)=>{
-                            <TtitleBar/>
+                            
                             return(
                             
                                 
