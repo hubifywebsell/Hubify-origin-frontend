@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Loader } from "../components/loader";
 import ProductCard from "../components/productCard";
+import TtitleBar from "../components/header";
 
 
 export function ProductPage(){
@@ -24,7 +25,7 @@ export function ProductPage(){
             });
         }
     },[isLoading])
-
+    <TtitleBar/>
     return(
         <div className="w-full min-h-[calc(100vh-100px)] bg-orange-100">
             {
