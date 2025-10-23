@@ -23,10 +23,14 @@ export default function HomePage() {
       <MainHeader/>
      
 
-
+      {/* Show TitleBar + ArivleBar only on homepage ("/" or "/products") */}
+      {(location.pathname === "/") && (
+        <>
           <ProductNews/>
-           <TtitleBar />
-
+          
+        </>
+      )}
+       <TtitleBar />
 
       <Routes>
         <Route path="/" element={<ProductPage />} />
