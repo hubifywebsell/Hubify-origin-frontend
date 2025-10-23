@@ -25,17 +25,22 @@ export function ProductPage(){
             });
         }
     },[isLoading])
-    <TtitleBar/>
+
     return(
-        <div className="w-full min-h-[calc(100vh-100px)] bg-orange-100">
+        
+        <div className="w-full min-h-[calc(100vh-100px)] bg-orange-100"><TtitleBar/>
             {
                 isLoading? <Loader/>:
                 
                 <div className="w-full h-full flex flex-row flex-wrap justify-center bg-white">
                     {
                         products.map((item)=>{
+                            <TtitleBar/>
                             return(
+                            
+                                
                                 <ProductCard key={item.productID} product={item}/>
+                            
                             )
                         })
                     }
