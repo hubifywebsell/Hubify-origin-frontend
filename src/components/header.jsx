@@ -1,7 +1,14 @@
-import { useState } from "react";
-import { BsCart3 } from "react-icons/bs";
-import { MdMenu } from "react-icons/md";
 import { Link } from "react-router-dom";
+import { useState, useEffect, useRef } from "react";
+
+// Icons
+import { MdMenu } from "react-icons/md";
+import { BsCart3 } from "react-icons/bs";
+import { FaHome, FaChevronLeft, FaChevronRight, FaPlay } from "react-icons/fa";
+import { FaPause } from "react-icons/fa6";
+import { AiOutlineProduct } from "react-icons/ai";
+import { IoMdContacts } from "react-icons/io";
+import { IoSettingsSharp } from "react-icons/io5";
 import UserData from "./userData";
 import UserDataMobile from "./userDataMobile";
 
@@ -58,10 +65,7 @@ export default function Header() {
 				)}
 
 				<div className="hidden  h-full lg:flex justify-center items-center w-full text-lg gap-[20px]">
-					<Link to="/">Home</Link>
-					<Link to="/products">Products</Link>
-					<Link to="/about">About</Link>
-					<Link to="/contact">Contact</Link>
+					
 				</div>
 				<div className="h-full hidden lg:flex w-[200px] absolute right-[100px] top-0  justify-end items-center gap-4">
 					<UserData />
@@ -70,9 +74,188 @@ export default function Header() {
 					to="/cart"
 					className="h-full absolute right-0 hidden text-3xl lg:flex justify-center items-center"
 				>
-					<BsCart3 />
+					
 				</Link>
 			</div>
 		</header>
 	);
+}
+
+export function TtitleBar() {
+  return (
+    <header className="w-full h-[100px] mr-[80px] text-white px-[40px] hidden lg:flex justify-center items-center gap-10 bg-accent">
+      <Link to="/" className="flex gap-2 items-center">
+        <FaHome className="text-3xl cursor-pointer" />
+        <span>Home</span>
+      </Link>
+
+      <Link to="/products" className="flex gap-2 items-center">
+        <AiOutlineProduct className="text-3xl cursor-pointer" />
+        <span>Products</span>
+      </Link>
+
+      <Link to="/contact" className="flex gap-2 items-center">
+        <IoMdContacts className="text-3xl cursor-pointer" />
+        <span>Contact</span>
+      </Link>
+
+      <Link to="/about">About Us</Link>
+      <Link to="/settings" className="hover:text-accent transition">
+        <IoSettingsSharp className="text-3xl cursor-pointer" />
+      </Link>
+      <BsCart3 className="w-[30px] h-[30px]"/>
+    </header>
+    
+    
+
+  
+  );
+}
+
+export function ProductNews() {
+  const slides = [
+    { type: "video", src: "/gaming 66.mp4" },
+    { type: "video", src: "/13075121_1920_1080_30fps.mp4" },
+    { type: "video", src: "/13057205_3840_2160_24fps.mp4" },
+    { type: "image", src: "/12 (1).png" },
+    { type: "image", src: "/12 (1).jpg" },
+    { type: "image", src: "/12 (2).jpg" },
+    { type: "image", src: "/12 (3).jpg" },
+    { type: "image", src: "/12 (5).jpg" },
+    { type: "image", src: "/12 (6).jpg" },
+    { type: "image", src: "/12 (7).jpg" },
+    { type: "image", src: "/12 (8).jpg" },
+    { type: "image", src: "/12 (9).jpg" },
+    { type: "image", src: "/12 (10).jpg" },
+    { type: "image", src: "/12 (12).jpg" },
+    { type: "image", src: "/12 (222).jpg" },
+    { type: "image", src: "/12 (333).jpg" },
+    { type: "image", src: "/12 (444).jpg" },
+    { type: "image", src: "/12 (555).jpg" },
+    { type: "image", src: "/12 (666).jpg" },
+    { type: "image", src: "/12 (777).jpg" },
+    { type: "image", src: "/gaming 66.webp" },
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const videoRefs = useRef([]);
+  const intervalRef = useRef(null);
+
+  // Helpers
+  const togglePlay = (i) => {
+    const video = videoRefs.current[i];
+    if (!video) return;
+    video.paused ? video.play() : video.pause();
+  };
+
+  const startSlider = () => {
+    if (intervalRef.current) return;
+    intervalRef.current = setInterval(
+      () => setCurrentIndex((prev) => (prev + 1) % slides.length),
+      5000
+    );
+  };
+
+  const stopSlider = () => {
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
+  };
+
+  const prevSlide = () =>
+    setCurrentIndex((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  const nextSlide = () =>
+    setCurrentIndex((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+
+  // Auto-slide
+  useEffect(() => {
+    startSlider();
+    return () => stopSlider();
+  }, []);
+
+  return (
+    <div
+      className="relative w-full h-[70vh] overflow-hidden bg-black shadow-lg rounded-b-3xl"
+      onMouseEnter={stopSlider}
+      onMouseLeave={startSlider}
+    >
+      {/* Slides */}
+      <div
+        className="flex h-full w-full transition-transform duration-700"
+        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+      >
+        {slides.map((slide, i) => (
+          <div
+            key={i}
+            className="w-full h-full flex-shrink-0 flex justify-center items-center relative"
+          >
+            {slide.type === "image" ? (
+              <img
+                src={slide.src}
+                alt={`Slide ${i}`}
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <div className="relative w-full h-full flex justify-center items-center group">
+                <video
+                  ref={(el) => (videoRefs.current[i] = el)}
+                  src={slide.src}
+                  autoPlay
+                  loop
+                  muted
+                  className="w-full h-full object-cover"
+                />
+                {/* Play/Pause Button */}
+                <button
+                  onClick={() => togglePlay(i)}
+                  className={`
+                    absolute bg-black/50 text-white p-4 rounded-full text-3xl
+                    transition-opacity duration-300
+                    ${
+                      videoRefs.current[i] &&
+                      videoRefs.current[i].paused
+                        ? "opacity-100"
+                        : "opacity-0 group-hover:opacity-100"
+                    }
+                  `}
+                >
+                  {videoRefs.current[i] && !videoRefs.current[i].paused ? (
+                    <FaPause />
+                  ) : (
+                    <FaPlay />
+                  )}
+                </button>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Navigation */}
+      <button
+        onClick={prevSlide}
+        className="absolute top-1/2 left-5 -translate-y-1/2 text-white bg-black/50 p-3 rounded-full hover:bg-black/70"
+      >
+        <FaChevronLeft size={28} />
+      </button>
+      <button
+        onClick={nextSlide}
+        className="absolute top-1/2 right-5 -translate-y-1/2 text-white bg-black/50 p-3 rounded-full hover:bg-black/70"
+      >
+        <FaChevronRight size={28} />
+      </button>
+
+      {/* Dots */}
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
+        {slides.map((_, index) => (
+          <div
+            key={index}
+            className={`h-3 w-3 rounded-full cursor-pointer ${
+              index === currentIndex ? "bg-orange-500" : "bg-gray-400"
+            }`}
+            onClick={() => setCurrentIndex(index)}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }
