@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Loader } from "../components/loader";
 import ProductCard from "../components/productCard";
-import TtitleBar from "../components/header";
+import Header, { ProductNews, TtitleBar,} from "../components/header";
 
 
 export function ProductPage(){
