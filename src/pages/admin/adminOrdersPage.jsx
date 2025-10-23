@@ -23,7 +23,7 @@ export default function AdminOrdersPage() {
                 return;
             }
 			axios
-			.get(import.meta.env.VITE_API_URL + "/api/orders",{
+			.get(import.meta.env.VITE_API_URL + "/orders",{
                 headers: {
                     Authorization: `Bearer ${token}`
                 },
