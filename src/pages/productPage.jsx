@@ -4,8 +4,9 @@ import toast from "react-hot-toast";
 import { Loader } from "../components/loader";
 import ProductCard from "../components/productCard";
 
-export function ProductPage(){
 
+export function ProductPage(){
+    
     const[products, setProducts] = useState([]);
     const[isLoading, setIsLoading] = useState(true);
 
@@ -25,11 +26,11 @@ export function ProductPage(){
     },[isLoading])
 
     return(
-        <div className="w-full min-h-[calc(100vh-100px)] bg-primary">
+        <div className="w-full min-h-[calc(100vh-100px)] bg-orange-100">
             {
-                isLoading? <Loader/>
-                :
-                <div className="w-full h-full flex flex-row flex-wrap justify-center bg-primary">
+                isLoading? <Loader/>:
+                
+                <div className="w-full h-full flex flex-row flex-wrap justify-center bg-white">
                     {
                         products.map((item)=>{
                             return(
@@ -37,7 +38,69 @@ export function ProductPage(){
                             )
                         })
                     }
-                    
+                    {
+                        products.map((item)=>{
+                            return(
+                                <ProductCard key={item.productID} product={item}/>
+                            )
+                        })
+                    }
+                    {
+                        products.map((item)=>{
+                            return(
+                                <ProductCard key={item.productID} product={item}/>
+                            )
+                        })
+                    }
+                    {
+                        products.map((item)=>{
+                            return(
+                                <ProductCard key={item.productID} product={item}/>
+                            )
+                        })
+                    }
+                    {
+                        products.map((item)=>{
+                            return(
+                                <ProductCard key={item.productID} product={item}/>
+                            )
+                        })
+                    }
+                    {
+                        products.map((item)=>{
+                            return(
+                                <ProductCard key={item.productID} product={item}/>
+                            )
+                        })
+                    }
+                    {
+                        products.map((item)=>{
+                            return(
+                                <ProductCard key={item.productID} product={item}/>
+                            )
+                        })
+                    }
+                    {
+                        products.map((item)=>{
+                            return(
+                                <ProductCard key={item.productID} product={item}/>
+                            )
+                        })
+                    }
+                    {
+                        products.map((item)=>{
+                            return(
+                                <ProductCard key={item.productID} product={item}/>
+                            )
+                        })
+                    }
+                    {
+                        products.map((item)=>{
+                            return(
+                                <ProductCard key={item.productID} product={item}/>
+                            )
+                        })
+                    }
                 </div>  
             }
         </div>
