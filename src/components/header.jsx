@@ -113,11 +113,7 @@ export function TtitleBar() {
 }
 
 
-import { useState, useRef, useEffect } from "react";
-import { FaPlay, FaPause, FaChevronLeft, FaChevronRight } from "react-icons/fa";
-
 export function ProductNews() {
-  // === Define two sets of slides ===
   const desktopSlides = [
     { type: "video", src: "/gaming 66.mp4" },
     { type: "video", src: "/13075121_1920_1080_30fps.mp4" },
@@ -144,31 +140,24 @@ export function ProductNews() {
 
   const mobileSlides = [
     { type: "video", src: "/gaming 66.mp4" },
-    { type: "video", src: "/130575121_1920_1080_30fps.mp4" },
-    { type: "image", src: "/12 (1).jpg" },
-    { type: "image", src: "/12 (2).jpg" },
-    { type: "image", src: "/12 (1).png" },
+
   ];
 
-  // === State ===
   const [slides, setSlides] = useState(desktopSlides);
   const [currentIndex, setCurrentIndex] = useState(0);
   const videoRefs = useRef([]);
   const intervalRef = useRef(null);
 
-  // === Detect screen size ===
   useEffect(() => {
     const checkScreen = () => {
       if (window.innerWidth <= 768) setSlides(mobileSlides);
       else setSlides(desktopSlides);
     };
-
     checkScreen();
     window.addEventListener("resize", checkScreen);
     return () => window.removeEventListener("resize", checkScreen);
   }, []);
 
-  // === Helpers ===
   const togglePlay = (i) => {
     const video = videoRefs.current[i];
     if (!video) return;
@@ -193,13 +182,11 @@ export function ProductNews() {
   const nextSlide = () =>
     setCurrentIndex((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
 
-  // === Auto-slide ===
   useEffect(() => {
     startSlider();
     return () => stopSlider();
   }, [slides]);
 
-  // === Play only visible video ===
   useEffect(() => {
     slides.forEach((slide, i) => {
       const video = videoRefs.current[i];
@@ -217,13 +204,12 @@ export function ProductNews() {
     <div
       className="
         relative w-full 
-        h-[40vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] 
-        overflow-hidden bg-black shadow-lg rounded-b-3xl
+        h-[20vh] sm:h-[40vh] md:h-[50vh] lg:h-[60vh] 
+        overflow-hidden bg-black shadow-lg
       "
       onMouseEnter={stopSlider}
       onMouseLeave={startSlider}
     >
-      {/* Slides */}
       <div
         className="flex h-full w-full transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
@@ -240,20 +226,12 @@ export function ProductNews() {
                 className="w-full h-full object-cover"
               />
             ) : (
+
               <div className="relative w-full h-full flex justify-center items-center group">
-                <video
-                  ref={(el) => (videoRefs.current[i] = el)}
-                  src={slide.src}
-                  autoPlay
-                  loop
-                  muted
-                  className="w-full h-full object-cover"
-                />
-                {/* Play/Pause Button */}
                 <button
                   onClick={() => togglePlay(i)}
                   className={`
-                    absolute bg-black/50 text-white p-3 sm:p-4 rounded-full text-2xl sm:text-3xl
+                    hover-hidden absolute bg-black/50 text-white p-3 sm:p-4 rounded-full text-2xl sm:text-3xl
                     transition-opacity duration-300
                     ${
                       videoRefs.current[i] && videoRefs.current[i].paused
@@ -262,11 +240,15 @@ export function ProductNews() {
                     }
                   `}
                 >
-                  {videoRefs.current[i] && !videoRefs.current[i].paused ? (
-                    <FaPause />
-                  ) : (
-                    <FaPlay />
-                  )}
+                <video
+                  ref={(el) => (videoRefs.current[i] = el)}
+                  src={slide.src}
+                  autoPlay
+                  loop
+                  muted
+                  className="w-full h-full lg:object-cover"
+                />
+                
                 </button>
               </div>
             )}
@@ -277,22 +259,22 @@ export function ProductNews() {
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute top-1/2 left-3 sm:left-5 -translate-y-1/2 text-white bg-black/50 p-2 sm:p-3 rounded-full hover:bg-black/70"
+        className="absolute top-1/2 left-3 sm:left-5 -translate-y-1/2 lg:text-white lg:bg-black/50 p-2 sm:p-3 rounded-full lg:flex lg:hover:bg-black/70"
       >
-        <FaChevronLeft size={22} className="sm:hidden" />
-        <FaChevronLeft size={28} className="hidden sm:block" />
+        <FaChevronLeft size={28} className="lg:flex" />
+        
       </button>
 
       <button
         onClick={nextSlide}
-        className="absolute top-1/2 right-3 sm:right-5 -translate-y-1/2 text-white bg-black/50 p-2 sm:p-3 rounded-full hover:bg-black/70"
+        className="absolute top-1/2 right-3 sm:right-5 -translate-y-1/2 lg:text-white lg:bg-black/50 p-2 sm:p-3 rounded-full lg:flex lg:hover:bg-black/70"
       >
-        <FaChevronRight size={22} className="sm:hidden" />
-        <FaChevronRight size={28} className="hidden sm:block" />
+        <FaChevronRight size={28} className="lg:flex" />
+        
       </button>
 
       {/* Dots */}
-      <div className="absolute bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 flex gap-1 sm:gap-2">
+      <div className="hidden absolute bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 gap-1 sm:gap-2 lg:flex">
         {slides.map((_, index) => (
           <div
             key={index}
