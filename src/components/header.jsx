@@ -115,32 +115,24 @@ export function TtitleBar() {
 
 export function ProductNews() {
   const desktopSlides = [
-    { type: "video", src: "/gaming 66.mp4" },
-    { type: "video", src: "/13075121_1920_1080_30fps.mp4" },
-    { type: "video", src: "/13057205_3840_2160_24fps.mp4" },
-    { type: "image", src: "/12 (1).png" },
-    { type: "image", src: "/12 (1).jpg" },
-    { type: "image", src: "/12 (2).jpg" },
-    { type: "image", src: "/12 (3).jpg" },
-    { type: "image", src: "/12 (5).jpg" },
-    { type: "image", src: "/12 (6).jpg" },
-    { type: "image", src: "/12 (7).jpg" },
-    { type: "image", src: "/12 (8).jpg" },
-    { type: "image", src: "/12 (9).jpg" },
-    { type: "image", src: "/12 (10).jpg" },
-    { type: "image", src: "/12 (12).jpg" },
-    { type: "image", src: "/12 (222).jpg" },
-    { type: "image", src: "/12 (333).jpg" },
-    { type: "image", src: "/12 (444).jpg" },
-    { type: "image", src: "/12 (555).jpg" },
-    { type: "image", src: "/12 (666).jpg" },
-    { type: "image", src: "/12 (777).jpg" },
-    { type: "image", src: "/gaming 66.webp" },
+    { type: "video", src: "/gaming 66.mp4", className: "object-contain"},
+    { type: "image", src: "/12 (1).png", className: "object-cover" },
+    { type: "image", src: "/12 (1).jpg", className: "object-cover" },
+    { type: "image", src: "/12 (2).jpg", className: "object-cover" },
+    { type: "image", src: "/12 (3).jpg", className: "object-cover" },
+    { type: "image", src: "/12 (5).jpg", className: "object-cover" },
+    { type: "image", src: "/12 (6).jpg", className: "object-cover" },
+    { type: "image", src: "/12 (7).jpg", className: "object-cover" },
+    { type: "image", src: "/12 (8).jpg", className: "object-cover" },
+    { type: "image", src: "/12 (9).jpg", className: "object-cover" },
+    { type: "image", src: "/12 (10).jpg", className: "object-cover" },
+    { type: "image", src: "/12 (12).jpg", className: "object-cover" },
+    { type: "image", src: "/12 (666).jpg", className: "object-cover" },
   ];
 
   const mobileSlides = [
-    { type: "video", src: "/gaming 66.mp4" },
-
+    { type: "video", src: "/gaming 66.mp4", className: "object-cover" },
+   
   ];
 
   const [slides, setSlides] = useState(desktopSlides);
@@ -226,30 +218,16 @@ export function ProductNews() {
                 className="w-full h-full object-cover"
               />
             ) : (
-
-              <div className="relative w-full h-full flex justify-center items-center group">
-                <button
-                  onClick={() => togglePlay(i)}
-                  className={`
-                    hover-hidden absolute bg-black/50 text-white p-3 sm:p-4 rounded-full text-2xl sm:text-3xl
-                    transition-opacity duration-300
-                    ${
-                      videoRefs.current[i] && videoRefs.current[i].paused
-                        ? "opacity-100"
-                        : "opacity-0 group-hover:opacity-100"
-                    }
-                  `}
-                >
+              <div onClick={() => togglePlay(i)} className="relative w-full h-full flex justify-center items-center group">
                 <video
                   ref={(el) => (videoRefs.current[i] = el)}
                   src={slide.src}
                   autoPlay
                   loop
                   muted
-                  className="w-full h-full lg:object-cover"
+                  className="w-full h-full object-cover"
                 />
                 
-                </button>
               </div>
             )}
           </div>
@@ -259,7 +237,7 @@ export function ProductNews() {
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute top-1/2 left-3 sm:left-5 -translate-y-1/2 lg:text-white lg:bg-black/50 p-2 sm:p-3 rounded-full lg:flex lg:hover:bg-black/70"
+        className="hidden absolute top-1/2 left-3 sm:left-5 -translate-y-1/2 text-white bg-black/50 p-2 sm:p-3 lg:flex rounded-full hover:bg-black/70"
       >
         <FaChevronLeft size={28} className="lg:flex" />
         
@@ -267,14 +245,14 @@ export function ProductNews() {
 
       <button
         onClick={nextSlide}
-        className="absolute top-1/2 right-3 sm:right-5 -translate-y-1/2 lg:text-white lg:bg-black/50 p-2 sm:p-3 rounded-full lg:flex lg:hover:bg-black/70"
+        className="hidden absolute top-1/2 right-3 sm:right-5 -translate-y-1/2 text-white bg-black/50 p-2 sm:p-3 lg:flex rounded-full hover:bg-black/70"
       >
         <FaChevronRight size={28} className="lg:flex" />
         
       </button>
 
       {/* Dots */}
-      <div className="hidden absolute bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 gap-1 sm:gap-2 lg:flex">
+      <div className="hidden absolute bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 lg:flex gap-1 sm:gap-2">
         {slides.map((_, index) => (
           <div
             key={index}
