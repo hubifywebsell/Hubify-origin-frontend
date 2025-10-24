@@ -112,6 +112,7 @@ export function TtitleBar() {
   );
 }
 
+
 export function ProductNews() {
   const slides = [
     { type: "video", src: "/gaming 66.mp4" },
@@ -141,7 +142,7 @@ export function ProductNews() {
   const videoRefs = useRef([]);
   const intervalRef = useRef(null);
 
-  // Helpers
+  // === Helpers ===
   const togglePlay = (i) => {
     const video = videoRefs.current[i];
     if (!video) return;
@@ -166,22 +167,39 @@ export function ProductNews() {
   const nextSlide = () =>
     setCurrentIndex((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
 
-  // Auto-slide
+  // === Auto-slide ===
   useEffect(() => {
     startSlider();
     return () => stopSlider();
   }, []);
 
+  // === Responsive video playback (only play visible video) ===
+  useEffect(() => {
+    slides.forEach((slide, i) => {
+      const video = videoRefs.current[i];
+      if (video) {
+        if (i === currentIndex) video.play();
+        else {
+          video.pause();
+          video.currentTime = 0;
+        }
+      }
+    });
+  }, [currentIndex]);
+
   return (
     <div
-      className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden bg-black shadow-lg rounded-b-3xl"
-
+      className="
+        relative w-full 
+        h-[40vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] 
+        overflow-hidden bg-black shadow-lg rounded-b-3xl
+      "
       onMouseEnter={stopSlider}
       onMouseLeave={startSlider}
     >
       {/* Slides */}
       <div
-        className="flex h-full w-full transition-transform duration-700"
+        className="flex h-full w-full transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
         {slides.map((slide, i) => (
@@ -209,11 +227,10 @@ export function ProductNews() {
                 <button
                   onClick={() => togglePlay(i)}
                   className={`
-                    absolute bg-black/50 text-white p-4 rounded-full text-3xl
+                    absolute bg-black/50 text-white p-3 sm:p-4 rounded-full text-2xl sm:text-3xl
                     transition-opacity duration-300
                     ${
-                      videoRefs.current[i] &&
-                      videoRefs.current[i].paused
+                      videoRefs.current[i] && videoRefs.current[i].paused
                         ? "opacity-100"
                         : "opacity-0 group-hover:opacity-100"
                     }
@@ -231,26 +248,29 @@ export function ProductNews() {
         ))}
       </div>
 
-      {/* Navigation */}
+      {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute top-1/2 left-5 -translate-y-1/2 text-white bg-black/50 p-3 rounded-full hover:bg-black/70"
+        className="absolute top-1/2 left-3 sm:left-5 -translate-y-1/2 text-white bg-black/50 p-2 sm:p-3 rounded-full hover:bg-black/70"
       >
-        <FaChevronLeft size={28} />
+        <FaChevronLeft size={22} className="sm:hidden" />
+        <FaChevronLeft size={28} className="hidden sm:block" />
       </button>
+
       <button
         onClick={nextSlide}
-        className="absolute top-1/2 right-5 -translate-y-1/2 text-white bg-black/50 p-3 rounded-full hover:bg-black/70"
+        className="absolute top-1/2 right-3 sm:right-5 -translate-y-1/2 text-white bg-black/50 p-2 sm:p-3 rounded-full hover:bg-black/70"
       >
-        <FaChevronRight size={28} />
+        <FaChevronRight size={22} className="sm:hidden" />
+        <FaChevronRight size={28} className="hidden sm:block" />
       </button>
 
       {/* Dots */}
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 flex gap-2">
+      <div className="absolute bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 flex gap-1 sm:gap-2">
         {slides.map((_, index) => (
           <div
             key={index}
-            className={`h-3 w-3 rounded-full cursor-pointer ${
+            className={`h-2 w-2 sm:h-3 sm:w-3 rounded-full cursor-pointer ${
               index === currentIndex ? "bg-orange-500" : "bg-gray-400"
             }`}
             onClick={() => setCurrentIndex(index)}
@@ -260,3 +280,4 @@ export function ProductNews() {
     </div>
   );
 }
+
