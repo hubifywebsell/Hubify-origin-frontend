@@ -5,9 +5,9 @@ import ProductOverview from "./productOverview";
 
 import CartPage from "./cart";
 import CheckoutPage from "./checkout";
-//import AboutPage from "./AboutPage";
-//import ContactPage from "./ContactPage";
-//import SettingsPage from "./settings";
+import About from "./About";
+import Contact from "./Contact";
+import Settings from "./settings";
 import MainHeader from "../components/header";
 import NotFoundPage from "./notFoundPage";
 
@@ -36,7 +36,9 @@ export default function HomePage() {
         <Route path="/" element={<ProductPage />} />
         <Route path="/products" element={<ProductPage />} />
         <Route path="/overview/:id" element={<ProductOverview />} />
-        
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/settings" element={<Settings />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/*" element={<NotFoundPage/>} />
