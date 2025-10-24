@@ -113,8 +113,12 @@ export function TtitleBar() {
 }
 
 
+import { useState, useRef, useEffect } from "react";
+import { FaPlay, FaPause, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
 export function ProductNews() {
-  const slides = [
+  // === Define two sets of slides ===
+  const desktopSlides = [
     { type: "video", src: "/gaming 66.mp4" },
     { type: "video", src: "/13075121_1920_1080_30fps.mp4" },
     { type: "video", src: "/13057205_3840_2160_24fps.mp4" },
@@ -138,9 +142,31 @@ export function ProductNews() {
     { type: "image", src: "/gaming 66.webp" },
   ];
 
+  const mobileSlides = [
+    { type: "video", src: "/gaming 66.mp4" },
+    { type: "video", src: "/130575121_1920_1080_30fps.mp4" },
+    { type: "image", src: "/12 (1).jpg" },
+    { type: "image", src: "/12 (2).jpg" },
+    { type: "image", src: "/12 (1).png" },
+  ];
+
+  // === State ===
+  const [slides, setSlides] = useState(desktopSlides);
   const [currentIndex, setCurrentIndex] = useState(0);
   const videoRefs = useRef([]);
   const intervalRef = useRef(null);
+
+  // === Detect screen size ===
+  useEffect(() => {
+    const checkScreen = () => {
+      if (window.innerWidth <= 768) setSlides(mobileSlides);
+      else setSlides(desktopSlides);
+    };
+
+    checkScreen();
+    window.addEventListener("resize", checkScreen);
+    return () => window.removeEventListener("resize", checkScreen);
+  }, []);
 
   // === Helpers ===
   const togglePlay = (i) => {
@@ -171,9 +197,9 @@ export function ProductNews() {
   useEffect(() => {
     startSlider();
     return () => stopSlider();
-  }, []);
+  }, [slides]);
 
-  // === Responsive video playback (only play visible video) ===
+  // === Play only visible video ===
   useEffect(() => {
     slides.forEach((slide, i) => {
       const video = videoRefs.current[i];
@@ -185,7 +211,7 @@ export function ProductNews() {
         }
       }
     });
-  }, [currentIndex]);
+  }, [currentIndex, slides]);
 
   return (
     <div
@@ -280,4 +306,3 @@ export function ProductNews() {
     </div>
   );
 }
-
