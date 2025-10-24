@@ -12,6 +12,7 @@ import { IoSettingsSharp } from "react-icons/io5";
 import UserData from "./userData";
 import UserDataMobile from "./userDataMobile";
 
+
 export default function Header() {
 	const [isSideBarOpen, setIsSidebarOpen] = useState(false);
 
@@ -81,6 +82,7 @@ export default function Header() {
 	);
 }
 
+
 export function TtitleBar() {
   return (
     <header className="w-full h-[100px] mr-[80px] text-white px-[40px] hidden lg:flex justify-center items-center gap-10 bg-accent">
@@ -99,16 +101,16 @@ export function TtitleBar() {
         <span>Contact</span>
       </Link>
 
-      <Link to="/about">About Us</Link>
+      <Link to="/about" className="flex gap-2 items-center">
+        About Us
+      </Link>
+
       <Link to="/settings" className="hover:text-accent transition">
         <IoSettingsSharp className="text-3xl cursor-pointer" />
       </Link>
-      <BsCart3 className="w-[30px] h-[30px]"/>
-    </header>
-    
-    
 
-  
+      <BsCart3 className="w-[30px] h-[30px]" />
+    </header>
   );
 }
 
