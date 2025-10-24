@@ -174,7 +174,8 @@ export function ProductNews() {
 
   return (
     <div
-      className="relative w-full h-[70vh] overflow-hidden bg-black shadow-lg rounded-b-3xl"
+      className="relative w-full h-[60vh] sm:h-[70vh] overflow-hidden bg-black shadow-lg rounded-b-3xl"
+
       onMouseEnter={stopSlider}
       onMouseLeave={startSlider}
     >
