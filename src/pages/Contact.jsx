@@ -66,9 +66,9 @@ export default function Contact() {
         </form>
 
         <div className="mt-10 text-gray-400">
-          <p>Email: <span className="text-white">support@alipres.com</span></p>
-          <p>Phone: <span className="text-white">+94 77 123 4567</span></p>
-          <p>Location: <span className="text-white">Colombo, Sri Lanka</span></p>
+          <p>Email: <span className="text-black">alipres@gmail.com</span></p>
+          <p>Phone: <span className="text-black">+94 71 102 2594</span></p>
+          <p>Location: <span className="text-black">Colombo, Sri Lanka</span></p>
         </div>
       </div>
     </div>

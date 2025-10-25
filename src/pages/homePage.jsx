@@ -11,6 +11,7 @@ import Settings from "./settings";
 import MainHeader from "../components/header";
 import NotFoundPage from "./notFoundPage";
 
+
   
 
 
@@ -41,6 +42,7 @@ export default function HomePage() {
         <Route path="/settings" element={<Settings />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        
         <Route path="/*" element={<NotFoundPage/>} />
       </Routes>
 
