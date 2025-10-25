@@ -200,18 +200,7 @@ export default function UpdateProductPage() {
 								}}
 								className="h-11 rounded-xl border border-secondary/20 bg-white px-3 text-secondary outline-none focus:border-accent focus:ring-4 focus:ring-accent/20 transition"
 							>
-								<option value="Cream">Cream</option>
-								<option value="Lotion">Lotion</option>
-								<option value="Serum">Serum</option>
-								<option value="Keyboard">Keyboard</option>
-								<option value="Mouse">Mouse</option>
-								<option value="Motherboard">Motherboard</option>
-								<option value="Grapics card">Grapics Card</option>
-								<option value="Gaming case">Gaming Case</option>
-								<option value="Pc pre bilde">PC Pre Bilde</option>
-								<option value="Cooler">Cooler</option>
-								<option value="Power Supply">Power Supply</option>
-								<option value="CPU">CPU</option>
+								
 							</select>
 						</label>
 
