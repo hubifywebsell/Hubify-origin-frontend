@@ -10,7 +10,13 @@ import Contact from "./Contact";
 import Settings from "./settings";
 import MainHeader from "../components/header";
 import NotFoundPage from "./notFoundPage";
-
+import ProfilePage from "./profile";
+import WishlistPage from "./wishlist";
+import FAQPage from "./faq";
+import TermsPage from "./terms";
+import ReturnsPage from "./returns";
+import ReviewsPage from "./reviews";
+import SearchResultsPage from "./searchResults";
 
   
 
@@ -22,7 +28,6 @@ export default function HomePage() {
   return (
     <div className="w-auto h-auto bg-white">
       <MainHeader/>
-     
 
       {/* Show TitleBar + ArivleBar only on homepage ("/" or "/products") */}
       {(location.pathname === "/") && (
@@ -31,11 +36,18 @@ export default function HomePage() {
           
         </>
       )}
-       <TtitleBar />
+      <TtitleBar />
 
       <Routes>
         <Route path="/" element={<ProductPage />} />
         <Route path="/products" element={<ProductPage />} />
+        <Route path="/search" element={<SearchResultsPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/wishlist" element={<WishlistPage />} />
+        <Route path="/faq" element={<FAQPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/returns" element={<ReturnsPage />} />
+        <Route path="/reviews" element={<ReviewsPage />} />
         <Route path="/overview/:id" element={<ProductOverview />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
