@@ -79,7 +79,7 @@ export default function UpdateProductPage() {
 				},
 			});
 
-			toast.success("✅ Product updated successfully!");
+			toast.success("✅🤙 Product updated successfully!");
 			navigate("/admin/products");
 		} catch (err) {
 			console.error(err);
