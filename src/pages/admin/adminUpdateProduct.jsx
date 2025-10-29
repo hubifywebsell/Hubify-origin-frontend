@@ -50,7 +50,7 @@ export default function UpdateProductPage() {
 				stock : stock
 			}
 
-			await axios.put(import.meta.env.VITE_API_URL+"/products/"+productId,product,{
+			await axios.put(import.meta.env.VITE_API_URL+"/api/products/"+productId,product,{
 				headers:{
 					Authorization : "Bearer "+token
 				}
