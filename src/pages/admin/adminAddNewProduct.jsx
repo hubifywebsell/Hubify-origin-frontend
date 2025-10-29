@@ -45,7 +45,7 @@ export default function AddProductPage() {
 				stock : stock
 			}
 
-				await axios.post(import.meta.env.VITE_API_URL+"/products",product,{
+				await axios.post(import.meta.env.VITE_API_URL+"/api/products",product,{
 					headers:{
 						Authorization : "Bearer "+token
 					}
