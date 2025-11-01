@@ -29,13 +29,6 @@ export default function HomePage() {
     <div className="w-auto h-auto bg-white">
       <MainHeader/>
 
-      {/* Show TitleBar + ArivleBar only on homepage ("/" or "/products") */}
-      {(location.pathname === "/") && (
-        <>
-          <ProductNews/>
-          
-        </>
-      )}
       <TtitleBar />
 
       <Routes>
